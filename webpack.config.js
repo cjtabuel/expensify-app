@@ -1,7 +1,8 @@
 const path = require('path')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
-module.exports = () => {
+module.exports = (env) => {
+  const isProduction = env === 'production'
   return {
     entry: {
       index: ['babel-polyfill', './src/app.js'],
@@ -52,6 +53,6 @@ module.exports = () => {
       historyApiFallback: true,
       publicPath: '/scripts/'
     },
-    devtool: 'source-map'
+    devtool: isProduction ? 'source-map' : 'inline-source-map'
   }
 }
