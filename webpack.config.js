@@ -8,7 +8,7 @@ module.exports = (env) => {
       index: ['babel-polyfill', './src/app.js'],
     },
     output: {
-      path: path.resolve(__dirname, 'public/'),
+      path: path.resolve(__dirname, 'public', 'dist'),
       filename: '[name]-bundle.js'
     },
     module: {
@@ -51,7 +51,7 @@ module.exports = (env) => {
     devServer: {
       contentBase: path.resolve(__dirname, 'public'),
       historyApiFallback: true,
-      publicPath: '/scripts/'
+      publicPath: '/dist/'
     },
     devtool: isProduction ? 'source-map' : 'inline-source-map'
   }
