@@ -10,7 +10,7 @@ const expenses = [{
   id: '2',
   description: 'Rent',
   note: '',
-  amount: 10950,
+  amount: 109500,
   createdAt: moment(0).subtract(4, 'days').valueOf()
 }, {
   id: '3',
