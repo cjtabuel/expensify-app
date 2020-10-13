@@ -2,20 +2,13 @@ import React from 'react'
 import { ExpensesSummary } from '../../components/ExpensesSummary'
 import { shallow } from 'enzyme'
 
-let wrapper, expensesCount, expensesTotal
-
-beforeEach(() => {
-  expensesCount = jest.fn()
-  expensesTotal = jest.fn()
-  wrapper = shallow(
-    <ExpensesSummary
-      expensesCount = {expensesCount}
-      expensesTotal = {expensesTotal}
-    />
-  )
+test('should render ExpensesSummary with 1 expense', () => {
+  const wrapper = shallow(<ExpensesSummary expenseCount={1} expensesTotal={250} />)
+  expect(wrapper).toMatchSnapshot()
 })
 
-test('should render ExpensesSummary correctly', () => {
+test('should render ExpensesSummary with multiple expenses', () => {
+  const wrapper = shallow(<ExpensesSummary expenseCount={2} expensesTotal={750} />)
   expect(wrapper).toMatchSnapshot()
 })
 
