@@ -6,7 +6,6 @@ const addExpense = (expense) => ({
   expense
 })
 
-// startAddExpense
 const startAddExpense = (expenseData = {}) => {
   return (dispatch) => {
     const {
@@ -37,7 +36,6 @@ const removeExpense = ({ id } = {}) => {
   }
 }
 
-// startRemoveExpense
 const startRemoveExpense = ({ id } = {}) => {
   return (dispatch) => {
     return db.ref(`expenses/${id}`).remove()
@@ -56,13 +54,20 @@ const editExpense = (id, updates) => {
   }
 }
 
+const startEditExpense = (id, updates) => {
+  return (dispatch) => {
+    return db.ref(`expenses/${id}`).update(updates).then(() => {
+      dispatch(editExpense(id, updates))
+    })
+  }
+}
+
 // SET_EXPENSES
 const setExpenses = (expenses) => ({
   type: 'SET_EXPENSES',
   expenses
 })
- 
-// startSetExpenses
+
 const startSetExpenses = () => {
   return (dispatch) => {
     return db.ref('expenses').once('value')
@@ -87,6 +92,7 @@ export {
   removeExpense,
   startRemoveExpense,
   editExpense,
+  startEditExpense,
   setExpenses,
   startSetExpenses
 }
