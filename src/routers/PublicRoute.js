@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Route, Redirect } from 'react-router-dom'
 
-export const PublicRoute = ({
+const PublicRoute = ({
   isAuthenticated,
   component: Component,
   ...rest
@@ -22,4 +22,5 @@ const mapStateToProps = (state) => {
   }
 }
 
+export { PublicRoute }
 export default connect(mapStateToProps)(PublicRoute)
