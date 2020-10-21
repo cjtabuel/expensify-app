@@ -1,0 +1,30 @@
+.button {
+  background: $red;
+  border: none;
+  border-radius: 7px;
+  color: white;
+  display: inline-block;
+  font-weight: 300;
+  font-size: $font-size-large;
+  line-height: 1;
+  padding: $s-size;
+  text-decoration: none;
+}
+
+.button-logout {
+  @extend .button;
+  background: $dark-blue;
+}
+
+.button-add {
+  @extend .button;
+  background: $cyan;
+}
+
+.button--secondary {
+  background: $grey;
+}
+
+.button--link {
+  background: none;
+}
