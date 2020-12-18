@@ -1,30 +1,31 @@
 import React from 'react'
-import { connect } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { Route, Redirect } from 'react-router-dom'
-import Header from '../components/Header'
+
+import EmailVerificationDialog from '../components/EmailVerificationDialog'
 
 const PrivateRoute = ({
-  isAuthenticated,
   component: Component,
   ...rest
-}) => (
-  <Route {...rest} component={(props) => (
-    isAuthenticated ? (
-      <div>
-        <Header />
-        <Component {...props}/>
-      </div>
-    ) : (
-      <Redirect to="/"/>
-    )
-  )}/>
-)
+}) => {
+  // validates user login method and user email verification
+  const userLoginMethod = useSelector((state) => state.auth.loginMethod)
+  const isUserEmailVerified = useSelector((state) => state.auth.isUserEmailVerified)
+  const isPasswordLoginMethodAndEmailVerified = (userLoginMethod === 'password' && !isUserEmailVerified)
 
-const mapStateToProps = (state) => {
-  return {
-    isAuthenticated: !!state.auth.uid
-  }
+  const isAuthenticated = useSelector((state) => !!state.auth.uid)
+  
+  return (
+    <Route {...rest} component={(props) => (
+      isAuthenticated ? (
+        <div>
+          {isPasswordLoginMethodAndEmailVerified ? <EmailVerificationDialog /> : <Component {...props} />}
+        </div>
+      ) : (
+          <Redirect to="/" />
+        )
+    )} />
+  )
 }
 
-export { PrivateRoute }
-export default connect(mapStateToProps)(PrivateRoute)
+export { PrivateRoute as default }

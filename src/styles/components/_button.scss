@@ -7,18 +7,22 @@
   font-weight: 300;
   font-size: $font-size-large;
   line-height: 1;
+  margin: $s-size;
   padding: $s-size;
   text-decoration: none;
 }
 
 .button-logout {
   @extend .button;
-  background: $dark-blue;
+  background: inherit;
 }
 
 .button-add {
-  @extend .button;
-  background: $cyan;
+  text-decoration: none;
+}
+
+.button-cancel {
+  text-decoration: none;
 }
 
 .button--secondary {

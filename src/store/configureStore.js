@@ -3,20 +3,28 @@ import thunk from 'redux-thunk'
 import expensesReducer from '../reducers/expenses'
 import filtersReducer from '../reducers/filters'
 import authReducer from '../reducers/auth'
+import appSettingsReducer from '../reducers/app-settings'
+import userProfileReducer from '../reducers/user-profile'
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const configureStore = () => {
-  const store = createStore(
-    combineReducers({
-      expenses: expensesReducer,
-      filters: filtersReducer,
-      auth: authReducer
-    }),
-    composeEnhancers(applyMiddleware(thunk))
-  )
+  const appReducer = combineReducers({
+    expenses: expensesReducer,
+    filters: filtersReducer,
+    auth: authReducer,
+    appSettings: appSettingsReducer,
+    userProfile: userProfileReducer,
+  })
 
-  return store
+  const rootReducer = (state, action) => {
+    if (action.type === 'LOGOUT') {
+      state = undefined
+    }
+     
+    return appReducer(state, action) 
+  }
+  return createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)))
 }
 
 export default configureStore

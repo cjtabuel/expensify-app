@@ -13,7 +13,7 @@ const startAddExpense = (expenseData = {}) => {
       description = '',
       note = '',
       amount = 0,
-      createdAt = 0   
+      createdAt = 0
     } = expenseData
 
     const expense = { description, note, amount, createdAt }
@@ -91,7 +91,7 @@ const startSetExpenses = () => {
   }
 }
 
-export { 
+export {
   addExpense,
   startAddExpense,
   removeExpense,

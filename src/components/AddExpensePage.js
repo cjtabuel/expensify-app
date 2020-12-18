@@ -1,36 +1,60 @@
-import React from 'react'
-import ExpenseForm from './ExpenseForm'
-import { connect } from 'react-redux'
+import React, { useCallback } from 'react'
+import ExpenseForm2 from './ExpenseForm2'
+import { useDispatch } from 'react-redux'
 import { startAddExpense } from '../actions/expenses'
 
-class AddExpensePage extends React.Component {
-  onSubmit = (expense) => {
-    this.props.startAddExpense(expense)
-    this.props.history.push('/')
+import {
+  Box,
+  Button,
+  Container,
+  Grid,
+  Paper,
+  Typography
+} from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    '& > *': {
+      paddingTop: theme.spacing(3),
+      marginBottom: theme.spacing(6),
+      width: theme.spacing(700),
+      height: theme.spacing(14),
+      backgroundColor: theme.palette.type === 'dark' ? '#2a2a2a' : '#f7f7f7',
+    }
+  },
+}));
+
+const AddExpensePage = (props) => {
+  const classes = useStyles();
+  const dispatch = useDispatch()
+  const startAddExpenseAction = useCallback((expense) => dispatch(startAddExpense(expense)))
+
+  const onSubmit = (expense) => {
+    startAddExpenseAction(expense)
+    props.history.push('/')
   }
-  render() {
-    return (
-      <div>
-        <div className="page-header">
-          <div className="content-container">
-            <h1 className="page-header__title">Add Expense</h1>
-          </div>
-        </div>
-        <div className="content-container">
-          <ExpenseForm
-            onSubmit={this.onSubmit}
-          />
-        </div>
+
+  return (
+    <div>
+      <div className={classes.root}>
+        <Paper elevation={0} square>
+          <Container fixed>
+            <Typography variant="h4" align="left">
+              <Box fontWeight={300} m={1}>
+                Add Expense
+              </Box>
+            </Typography>
+          </Container>
+        </Paper>
       </div>
-    )
-  }
+      <ExpenseForm2
+        onSubmit={onSubmit}
+      />
+    </div>
+  )
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    startAddExpense: (expense) => dispatch(startAddExpense(expense))
-  }
-}
-
-export { AddExpensePage }
-export default connect(undefined, mapDispatchToProps)(AddExpensePage)
+export { AddExpensePage as default }

@@ -36,6 +36,7 @@ class ExpenseListFilters extends React.Component {
               placeholder="Search Expenses"
               value={this.props.filters.text}
               onChange={this.onTextChange}
+              size='small'
             />
           </div>
           <div className="input-group--item">
