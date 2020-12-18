@@ -23,6 +23,8 @@ const AccountManagementDialog = ({ accountManagementDialogOpen, setAccountManage
   }
   const handleClose = () => {
     setAccountManagementDialogOpen(false)
+    setConfirmDeletionState(false)
+    setConfirmUnderstandingState(false)
   }
   const handleConfirmDeletion = (e) => {
     setConfirmDeletionState(e.target.checked)
